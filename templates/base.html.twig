@@ -1,12 +1,42 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
-    </body>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ asset("bootstrap/css/bootstrap.min.css") }}">
+    <link rel="stylesheet" href= {{ asset("css/style.css") }}>
+    <link href="https://fonts.googleapis.com/css?family=Jim+Nightshade&display=swap" rel="stylesheet">
+    <title>{% block title %}The Elven Zoo{% endblock %}</title>
+    {% block stylesheets %}{% endblock %}
+</head>
+<body>
+<header>
+    <h1>The Elven Zoo</h1>
+    <nav class="navbar navbar-light" style="background-color: #8fd19e;">
+        <a class="navbar-brand" href= {{ path('main') }}>Home</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" >Zones</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" >Animals</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" >Employees</a>
+                </li>
+
+            </ul>
+        </div>
+    </nav>
+</header>
+<br>
+
+{% block body %}{% endblock %}
+{% block javascripts %}{% endblock %}
+</body>
 </html>

@@ -1,0 +1,8 @@
+body {
+    font-family: 'Jim Nightshade', cursive;
+    text-align: center !important;
+    background-image:url("../images/trees.png");
+    background-attachment: fixed !important;
+    background-repeat:no-repeat !important;
+    color: #0b2e13;
+}
