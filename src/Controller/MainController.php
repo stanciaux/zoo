@@ -22,7 +22,7 @@ class MainController extends AbstractController
     }
 
     /**
-     * @Route("/zone/add", name="addZone")
+     * @Route("/addZone", name="addZone")
      */
     public function addZone(EntityManagerInterface $em, Request $request)
     {
@@ -48,19 +48,23 @@ class MainController extends AbstractController
     }
 
     /**
-     * @Route("/zone/delete/{id}", name="deleteZone")
+     * @Route("/deleteZone/{id}", name="deleteZone")
      */
     public function deleteZone(EntityManagerInterface $em, Request $request, $id)
     {
         // Sélectionner la zone par son id sur la page
-        $zoneRepository = $em->getRepository(Zone::class);
-        $zone =$zoneRepository->find($id);
+        $zone = $em->getRepository(Zone::class)->find($id);
+
+        // Affichage d'un message de succès de suppression
+        $this->addFlash('success', 'La zone '.$zone->getName().' a été supprimée avec succès.');
+
+        // Préparation de la suppression et suppression en bdd
         $zone->remove();
         $zone->flush();
 
-        $form = $this->createForm(ZoneType::class, $zone);
+        $this->redirectToRoute('main');
 
-        $form->handleRequest($request);
+
 
     }
 }
