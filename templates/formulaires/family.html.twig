@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}The Elven Zoo{% endblock %}
+
+{% block body %}
+
+    <h1>Welcome to the world of fantastic beasts!</h1>
+
+<div>
+    {{ form_start(formFamily) }}
+
+    {{ form_widget(formFamily) }}
+
+    <button type="submit">Add species</button>
+
+    {{ form_end(formFamily) }}
+</div>
+
+{% endblock %}
