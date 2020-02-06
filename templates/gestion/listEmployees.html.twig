@@ -8,17 +8,17 @@
     <table class="table container">
         <thead>
             <th scope="col">
-                name
+                Name
             </th>
             <th scope="col">
-                function
+                Function
             </th>
         </thead>
         {% for employee in employees %}
             <tbody>
                 <td> {{ employee.name }}</td>
                 <td> {{ employee.function }}</td>
-                <td><a href="{{ path('delete', {'id':employee.id}) }}">Remove</a><br/></td>
+                <td><a href="{{ path('employeeDelete', {'id':employee.id}) }}">Remove</a></td>
             </tbody>
 
         {% endfor %}

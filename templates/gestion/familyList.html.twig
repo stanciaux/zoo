@@ -3,19 +3,25 @@
 {% block title %}Hello FamilyController!{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
 <div class="example-wrapper">
 
-    <h4>Liste des espèces</h4>
+    <h2>List of species</h2>
 
-    <ul>
+    <table class="table container">
+        <thead>
+        <th scope="col">
+            Name
+        </th>
+        </thead>
         {% for fList in familyList %}
-                <li>{{ fList.name }} <a href="{{ path('familyDelete',{"id":fList.id}) }}">Supprimer</a></li>
+            <tbody>
+            <td> {{ fList.name }}</td>
+            <td><a href="{{ path('familyDelete',{"id":fList.id}) }}">Remove</a></td>
+            </tbody>
+
         {% endfor %}
-    </ul>
+
+    </table>
 </div>
 {% endblock %}

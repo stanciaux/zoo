@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class AnimalController extends AbstractController
 {
     /**
-     * @Route("/animal", name="addAnimal")
+     * @Route("/animal", name="animalAdd")
      */
     public function addAnimal(EntityManagerInterface $em, Request $request)
     {
@@ -29,7 +29,7 @@ class AnimalController extends AbstractController
             $this->addFlash("success", "A new animal has been added");
 
             $em->flush();
-            return $this->redirectToRoute('main');
+            return $this->redirectToRoute('animalList');
         }
 
 
@@ -54,7 +54,7 @@ class AnimalController extends AbstractController
     }
 
     /**
-     * @Route("/delete/{id}", name="delete")
+     * @Route("/animal/delete/{id}", name="animalDelete")
      */
     public function delete($id = null, EntityManagerInterface $em, Request $request)
     {

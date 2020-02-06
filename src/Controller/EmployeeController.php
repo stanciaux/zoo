@@ -12,7 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class EmployeeController extends AbstractController
 {
     /**
-     * @Route("/employee/add", name="employee")
+     * @Route("/employee/form", name="employeeForm")
      */
     public function addEmployee($id = null, EntityManagerInterface $em, Request $request)
     {
@@ -40,7 +40,7 @@ class EmployeeController extends AbstractController
             }
             //on envoie l'objet en bdd
             $em->flush();
-            return $this->redirectToRoute('listEmployee');
+            return $this->redirectToRoute('employeeList');
         }
 
         return $this->render('formulaires/addEmployee.html.twig', [
@@ -50,7 +50,7 @@ class EmployeeController extends AbstractController
     }
 
     /**
-     * @Route("/employee/list", name="listEmployee")
+     * @Route("/employee/list", name="employeeList")
      */
     public function listEmployees(EntityManagerInterface $em){
 
@@ -63,7 +63,7 @@ class EmployeeController extends AbstractController
     }
 
     /**
-     * @Route("/delete/{id}", name="delete")
+     * @Route("/employee/delete/{id}", name="employeeDelete")
      */
     public function delete($id = null, EntityManagerInterface $em, Request $request)
     {
@@ -71,6 +71,6 @@ class EmployeeController extends AbstractController
         $em->remove($employee);
         $em->flush();
         $this->addFlash('success', 'Employee ' . $employee->getName() . ' Removed');
-        return $this->redirectToRoute('listEmployee');
+        return $this->redirectToRoute('employeeList');
     }
 }
