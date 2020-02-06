@@ -39,4 +39,29 @@ class AnimalController extends AbstractController
             'animalForm'=> $form->createView(),
         ]);
     }
+
+    /**
+     * @Route("/animal/list", name="animalList")
+     */
+    public function listAnimal(EntityManagerInterface $em)
+    {
+        $animalRepository = $em->getRepository(Animal::class);
+        $animals = $animalRepository->findAll();
+
+        return $this->render('gestion/listAnimals.html.twig', [
+                'animals' => $animals,
+        ]);
+    }
+
+    /**
+     * @Route("/delete/{id}", name="delete")
+     */
+    public function delete($id = null, EntityManagerInterface $em, Request $request)
+    {
+        $animal = $em->getRepository(Animal::class)->find($id);
+        $em->remove($animal);
+        $em->flush();
+        $this->addFlash('success', 'Animal ' . $animal->getName() . ' Removed');
+        return $this->redirectToRoute('animalList');
+    }
 }
