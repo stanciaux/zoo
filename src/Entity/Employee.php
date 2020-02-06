@@ -21,11 +21,26 @@ class Employee implements UserInterface
      * @ORM\Column(type="string", length=255)
      */
     private $name;
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $username;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
     private $function;
+
+    /**
+     * @ORM\Column(type="json")
+     */
+    private $roles = [];
+
+    /**
+     * @var string The hashed password
+     * @ORM\Column(type="string")
+     */
+    private $password;
 
     public function getId(): ?int
     {
@@ -59,9 +74,21 @@ class Employee implements UserInterface
     /**
      * @inheritDoc
      */
-    public function getRoles()
+    public function getRoles(): array
     {
-        // TODO: Implement getRoles() method.
+        $roles = $this->roles;
+        // guarantee every user at least has ROLE_USER
+        $roles[] = 'ROLE_USER';
+
+        return array_unique($roles);
+    }
+
+    public function setRoles(array $roles): self
+    {
+        $this->roles = $roles;
+
+        return $this;
+
     }
 
     /**
@@ -69,7 +96,16 @@ class Employee implements UserInterface
      */
     public function getPassword()
     {
-        // TODO: Implement getPassword() method.
+
+        return (string)$this->password;
+    }
+
+    public function setPassword(string $password): self
+    {
+        $this->password = $password;
+
+        return $this;
+
     }
 
     /**
@@ -83,10 +119,22 @@ class Employee implements UserInterface
     /**
      * @inheritDoc
      */
-    public function getUsername()
+
+    public function getUsername(): string
     {
-        // TODO: Implement getUsername() method.
+        return (string)$this->username;
     }
+
+    /**
+     * @param mixed $username
+     * @return Employee
+     */
+    public function setUsername(string $username): self
+    {
+        $this->username = $username;
+        return $this;
+    }
+
 
     /**
      * @inheritDoc
