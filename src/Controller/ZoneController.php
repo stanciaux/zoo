@@ -11,19 +11,10 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ZoneController extends AbstractController
 {
-    /**
-     * @Route("/zone", name="zone")
-     */
-    public function index()
-    {
-        return $this->render('zone/index.html.twig', [
-            'controller_name' => 'ZoneController',
-        ]);
-    }
 
 
     /**
-     * @Route("/zone/list/delete/{id}", name="deleteZone")
+     * @Route("/zone/list/delete/{id}", name="zoneDelete")
      */
 
     public function deleteZone(EntityManagerInterface $em, $id)
@@ -42,7 +33,7 @@ class ZoneController extends AbstractController
     }
 
     /**
-     * @Route("/zones/list", name="zonesList")
+     * @Route("/zone/list", name="zonesList")
      */
     public function zonesList(EntityManagerInterface $em)
     {
@@ -54,7 +45,7 @@ class ZoneController extends AbstractController
     }
 
     /**
-     * @Route("/addZone", name="addZone")
+     * @Route("/zone/form", name="zoneForm")
      */
     public function addZone(EntityManagerInterface $em, Request $request)
     {
@@ -71,7 +62,7 @@ class ZoneController extends AbstractController
             $em->flush();
 
             $this->addFlash('success', "Une zone vient d'être ajoutée.");
-            return $this->redirectToRoute('main');
+            return $this->redirectToRoute('zonesList');
         }
 
         // Préparation du formulaire à envoyer au twig
@@ -79,21 +70,4 @@ class ZoneController extends AbstractController
             "zoneForm" => $form->createView()]);
     }
 
-//    /**
-//     * @Route("/deleteZone/{id}", name="deleteZone")
-//     */
-//    public function deleteZone(EntityManagerInterface $em, $id)
-//    {
-//        // Sélectionner la zone par son id sur la page
-//        $zone = $em->getRepository(Zone::class)->find($id);
-//
-//        // Préparation de la suppression et suppression en bdd
-//        $em->remove($zone);
-//        $em->flush();
-//
-//        // Affichage d'un message de succès de suppression
-//        $this->addFlash("success", "La zone ".$zone->getName()." a été supprimée avec succès.");
-//
-//        return $this->redirectToRoute('main');
-//    }
 }

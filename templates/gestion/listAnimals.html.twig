@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}The Elven Zoo{% endblock %}
+
+{% block body %}
+    <h2>All animals in the Elven Zoo</h2>
+
+    <table class="table container">
+        <thead>
+            <th scope="col">
+                name
+            </th>
+            <th scope="col">
+                birthday
+            </th>
+            <th scope="col">
+                gender
+            </th>
+            <th scope="col">
+                species
+            </th>
+        </thead>
+        {% for animal in animals %}
+            <tbody>
+                <td> {{ animal.name }}</td>
+                <td> {{ animal.birthday | date('d/m/Y') }}</td>
+                <td> {{ animal.gender }}</td>
+                <td> {{ animal.species }}</td>
+                <td><a href="{{ path('animalDelete', {'id':animal.id}) }}">Remove</a><br/></td>
+            </tbody>
+
+        {% endfor %}
+
+    </table>
+{% endblock %}

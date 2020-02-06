@@ -16,7 +16,7 @@ class FamilyController extends AbstractController
      */
     public function index()
     {
-        return $this->render('family/index.html.twig', [
+        return $this->render('family/addAnimals.html.twig', [
             'controller_name' => 'FamilyController',
         ]);
     }
@@ -35,7 +35,7 @@ class FamilyController extends AbstractController
 
             $this->addFlash("success", "New species : ".$newFamily->getName()." added");
 
-            return $this->redirectToRoute('main');
+            return $this->redirectToRoute('familyList');
         }
         return $this->render("formulaires/family.html.twig", ["formFamily" => $formFamily->createView()]);
     }
