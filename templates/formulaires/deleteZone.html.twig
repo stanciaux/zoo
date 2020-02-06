@@ -2,13 +2,10 @@
 {% form_theme zoneForm 'bootstrap_4_horizontal_layout.html.twig' %}
 
 {% block body %}
-    <h1>Suppression de la zone {{ zone.name }} :</h1>
+    <h1>Delete a zone :</h1>
     <div class="row">
         <div class="col-8 offset-2">
-            {{ form_start(zoneForm) }}
-            {{ form_row(zoneForm.name) }}
-            {{ form_row(zoneForm.surface) }}
-            {{ form_row(zoneForm.temperature) }}
+
             <button onclick="window.location={{ path('deleteZone', {'id':zone.id}) }}">Supprimer</button>
             {#pb avec le = ? #}
         </div>
