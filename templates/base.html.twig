@@ -26,8 +26,15 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#">Zones</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ path('familyForm') }}">Families</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Species
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{{ path('familyList') }}">Species list</a>
+                            <a class="dropdown-item" href="{{ path('familyForm') }}">Add a species</a>
+                        </div>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
