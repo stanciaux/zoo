@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
+<<<<<<< HEAD
+    <data-source source="LOCAL" name="zoo@localhost" uuid="29fc9220-2425-4a3f-a006-0db429fbc912">
+=======
+<<<<<<< HEAD
+    <data-source source="LOCAL" name="zoo@localhost" uuid="c189a86d-d0a0-4f8e-b350-7f259453d713">
+=======
     <data-source source="LOCAL" name="zoo@localhost" uuid="e32e930a-a203-4654-b3de-8dec36476652">
       <driver-ref>mariadb</driver-ref>
       <synchronize>true</synchronize>
@@ -14,6 +20,8 @@
       <jdbc-url>jdbc:mariadb://localhost:3306/zoo</jdbc-url>
     </data-source>
     <data-source source="LOCAL" name="zoo@localhost [3]" uuid="91705dcb-4cf4-455f-99dc-5e33c471b365">
+>>>>>>> 06536461e61f8a4972b853fc037bc6d3bf1e0b8b
+>>>>>>> 12dd8a8f7efb4b0d1777ebf405d6707077397377
       <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
