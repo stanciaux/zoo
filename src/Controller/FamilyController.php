@@ -16,7 +16,7 @@ class FamilyController extends AbstractController
      */
     public function index()
     {
-        return $this->render('family/index.html.twig', [
+        return $this->render('family/addAnimals.html.twig', [
             'controller_name' => 'FamilyController',
         ]);
     }

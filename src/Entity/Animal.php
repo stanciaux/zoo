@@ -31,6 +31,11 @@ class Animal
      */
     private $gender;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Family", inversedBy="animals")
+     */
+    private $species;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -68,6 +73,18 @@ class Animal
     public function setGender(int $gender): self
     {
         $this->gender = $gender;
+
+        return $this;
+    }
+
+    public function getSpecies(): ?Family
+    {
+        return $this->species;
+    }
+
+    public function setSpecies(?Family $species): self
+    {
+        $this->species = $species;
 
         return $this;
     }

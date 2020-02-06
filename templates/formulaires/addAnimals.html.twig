@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Animals{% endblock %}
+
+{% block body %}
+    <h2>Add a new animal</h2>
+    <div class="row">
+        <div class="col-8 offset-2">
+            {{ form(animalForm) }}
+        </div>
+    </div>
+{% endblock %}
