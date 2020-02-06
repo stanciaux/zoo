@@ -12,7 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class EmployeeController extends AbstractController
 {
     /**
-     * @Route("/employee", name="employee")
+     * @Route("/employee/add", name="employee")
      */
     public function addEmployee($id = null, EntityManagerInterface $em, Request $request)
     {
@@ -34,18 +34,43 @@ class EmployeeController extends AbstractController
             if ($id == null){
                 $em->persist($newEmployee);
                 //on crée un flash à afficher
-                $this->addFlash("success", "Un nouvel employé a été ajouté");
+                $this->addFlash("success", "A new employee has been added");
             }else{
-                $this->addFlash("success", "Un employé a été modifié");
+                $this->addFlash("success", "The employee ".$newEmployee->getName()." has been modified");
             }
             //on envoie l'objet en bdd
             $em->flush();
-            return $this->redirectToRoute('main');
+            return $this->redirectToRoute('listEmployee');
         }
 
-        return $this->render('gestion/employee.html.twig', [
+        return $this->render('formulaires/addEmployee.html.twig', [
             'employeeForm'=> $form->createView(),
 
         ]);
+    }
+
+    /**
+     * @Route("/employee/list", name="listEmployee")
+     */
+    public function listEmployees(EntityManagerInterface $em){
+
+        $employeeRepository = $em->getRepository(Employee::class);
+        $employees = $employeeRepository->findAll();
+
+        return $this->render('gestion/listEmployees.html.twig', [
+            'employees'=> $employees
+        ]);
+    }
+
+    /**
+     * @Route("/delete/{id}", name="delete")
+     */
+    public function delete($id = null, EntityManagerInterface $em, Request $request)
+    {
+        $employee = $em->getRepository(Employee::class)->find($id);
+        $em->remove($employee);
+        $em->flush();
+        $this->addFlash('success', 'Employee ' . $employee->getName() . ' Removed');
+        return $this->redirectToRoute('listEmployee');
     }
 }

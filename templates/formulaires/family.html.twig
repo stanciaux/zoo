@@ -1,19 +1,23 @@
 {% extends 'base.html.twig' %}
+{% form_theme formFamily 'bootstrap_4_horizontal_layout.html.twig' %}
 
 {% block title %}The Elven Zoo{% endblock %}
 
 {% block body %}
 
-    <h1>Welcome to the world of fantastic beasts!</h1>
+    <h2>Add a new species</h2>
 
-<div>
-    {{ form_start(formFamily) }}
+<div class="row">
+    <div class="col-8 offset-2">
+        {{ form_start(formFamily) }}
 
-    {{ form_widget(formFamily) }}
+        {{ form_widget(formFamily) }}
 
-    <button type="submit">Add species</button>
+        <button type="submit">Add species</button>
 
-    {{ form_end(formFamily) }}
+        {{ form_end(formFamily) }}
+    </div>
 </div>
 
 {% endblock %}
+
