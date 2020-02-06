@@ -34,13 +34,13 @@ class EmployeeController extends AbstractController
             if ($id == null){
                 $em->persist($newEmployee);
                 //on crée un flash à afficher
-                $this->addFlash("success", "Un nouvel employé a été ajouté");
+                $this->addFlash("success", "A new employee has been added");
             }else{
-                $this->addFlash("success", "Un employé a été modifié");
+                $this->addFlash("success", "The employee ".$newEmployee->getName()." has been modified");
             }
             //on envoie l'objet en bdd
             $em->flush();
-            return $this->redirectToRoute('main');
+            return $this->redirectToRoute('listEmployee');
         }
 
         return $this->render('formulaires/addEmployee.html.twig', [
@@ -60,5 +60,17 @@ class EmployeeController extends AbstractController
         return $this->render('gestion/listEmployees.html.twig', [
             'employees'=> $employees
         ]);
+    }
+
+    /**
+     * @Route("/delete/{id}", name="delete")
+     */
+    public function delete($id = null, EntityManagerInterface $em, Request $request)
+    {
+        $employee = $em->getRepository(Employee::class)->find($id);
+        $em->remove($employee);
+        $em->flush();
+        $this->addFlash('success', 'Employee ' . $employee->getName() . ' Removed');
+        return $this->redirectToRoute('listEmployee');
     }
 }

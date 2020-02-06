@@ -18,6 +18,7 @@
             <tbody>
                 <td> {{ employee.name }}</td>
                 <td> {{ employee.function }}</td>
+                <td><a href="{{ path('delete', {'id':employee.id}) }}">Remove</a><br/></td>
             </tbody>
 
         {% endfor %}
