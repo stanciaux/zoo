@@ -23,29 +23,36 @@ class ZoneController extends AbstractController
 
 
     /**
-     * @Route("/zonesList", name="zonesList")
+     * @Route("/zone/list/delete/{id}", name="deleteZone")
      */
 
+    public function deleteZone(EntityManagerInterface $em, $id)
+    {
+        // Sélectionner la zone par son id sur la page
+        $zone = $em->getRepository(Zone::class)->find($id);
+
+        // Préparation de la suppression et suppression en bdd
+        $em->remove($zone);
+        $em->flush();
+
+        // Affichage d'un message de succès de suppression
+        $this->addFlash("success", "Zone : ".$zone->getName()." deleted");
+
+        return $this->redirectToRoute('zonesList');
+    }
+
+    /**
+     * @Route("/zones/list", name="zonesList")
+     */
     public function zonesList(EntityManagerInterface $em)
     {
-        $zones = $em->getRepository(Zone::class)->findAll();
+        $zones = $em->getRepository(Zone::class)->findBy([], ["name" => "ASC"]);
 
-        return $this->render('/gestion/zonesList.html.twig', [
+        return $this->render('gestion/zonesList.html.twig', [
             'zones' => $zones
         ]);
     }
-//
-// public function list(EntityManagerInterface $em)
-//    {
-//
-//        $ideesRepository = $em->getRepository(idees::class);
-//        $idees =$ideesRepository->findBy([], ["dateCreated" => "DESC"]);
-//
-//        return $this->render('idea/idea.html.twig', [
-//            'idees' => $idees
-//        ]);
-//    }
-//
+
     /**
      * @Route("/addZone", name="addZone")
      */
@@ -72,21 +79,21 @@ class ZoneController extends AbstractController
             "zoneForm" => $form->createView()]);
     }
 
-    /**
-     * @Route("/deleteZone/{id}", name="deleteZone")
-     */
-    public function deleteZone(EntityManagerInterface $em, $id)
-    {
-        // Sélectionner la zone par son id sur la page
-        $zone = $em->getRepository(Zone::class)->find($id);
-
-        // Préparation de la suppression et suppression en bdd
-        $em->remove($zone);
-        $em->flush();
-
-        // Affichage d'un message de succès de suppression
-        $this->addFlash("success", "La zone ".$zone->getName()." a été supprimée avec succès.");
-
-        return $this->redirectToRoute('main');
-    }
+//    /**
+//     * @Route("/deleteZone/{id}", name="deleteZone")
+//     */
+//    public function deleteZone(EntityManagerInterface $em, $id)
+//    {
+//        // Sélectionner la zone par son id sur la page
+//        $zone = $em->getRepository(Zone::class)->find($id);
+//
+//        // Préparation de la suppression et suppression en bdd
+//        $em->remove($zone);
+//        $em->flush();
+//
+//        // Affichage d'un message de succès de suppression
+//        $this->addFlash("success", "La zone ".$zone->getName()." a été supprimée avec succès.");
+//
+//        return $this->redirectToRoute('main');
+//    }
 }
