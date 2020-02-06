@@ -23,11 +23,25 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#">Animals</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Zones</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Zones
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Zones list</a>
+                            <a class="dropdown-item" href="{{ path('addZone') }}">Add a zone</a>
+                        </div>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ path('familyForm') }}">Families</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Species
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Species list</a>
+                            <a class="dropdown-item" href="{{ path('familyForm') }}">Add a species</a>
+                        </div>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
@@ -35,7 +49,7 @@
                             Employees
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">Employees list</a>
+                            <a class="dropdown-item" href="{{ path('listEmployee') }}">Employees list</a>
                             <a class="dropdown-item" href="{{ path('employee') }}">Add an employee</a>
                         </div>
                     </li>
@@ -55,7 +69,7 @@
     <br>
 
     {% block body %}{% endblock %}
- 
+
 
     {# JQUERY POUR AFFICHAGE POUR MENU DEROULANT #}
     <footer>
