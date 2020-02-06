@@ -12,7 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class EmployeeController extends AbstractController
 {
     /**
-     * @Route("/employee", name="employee")
+     * @Route("/employee/add", name="employee")
      */
     public function addEmployee($id = null, EntityManagerInterface $em, Request $request)
     {
@@ -43,9 +43,22 @@ class EmployeeController extends AbstractController
             return $this->redirectToRoute('main');
         }
 
-        return $this->render('gestion/employee.html.twig', [
+        return $this->render('formulaires/addEmployee.html.twig', [
             'employeeForm'=> $form->createView(),
 
+        ]);
+    }
+
+    /**
+     * @Route("/employee/list", name="listEmployee")
+     */
+    public function listEmployees(EntityManagerInterface $em){
+
+        $employeeRepository = $em->getRepository(Employee::class);
+        $employees = $employeeRepository->findAll();
+
+        return $this->render('gestion/listEmployees.html.twig', [
+            'employees'=> $employees
         ]);
     }
 }

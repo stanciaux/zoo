@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}The Elven Zoo{% endblock %}
+
+{% block body %}
+    <h2>Zoo employees</h2>
+
+    <table class="table container">
+        <thead>
+            <th scope="col">
+                name
+            </th>
+            <th scope="col">
+                function
+            </th>
+        </thead>
+        {% for employee in employees %}
+            <tbody>
+                <td> {{ employee.name }}</td>
+                <td> {{ employee.function }}</td>
+            </tbody>
+
+        {% endfor %}
+
+    </table>
+{% endblock %}
