@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}The Elven Zoo{% endblock %}
+
+{% block body %}
+    <h2>All animals in the Elven Zoo</h2>
+
+    <p><a href="{{ path('animalNote', {animalId : animal.id}) }}">New Entry</a></p>
+
+    <table class="table container">
+        <thead>
+            <th scope="col">
+                title
+            </th>
+            <th scope="col">
+                date
+            </th>
+            <th scope="col">
+                note
+            </th>
+        </thead>
+        {% for note in notes %}
+            <tbody>
+                <td> {{ note.title }}</td>
+                <td> {{ note.date | date('d/m/Y') }}</td>
+                <td> {{ note.note }}</td>
+            </tbody>
+
+        {% endfor %}
+
+    </table>
+{% endblock %}
