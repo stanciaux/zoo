@@ -11,13 +11,13 @@
                 Name
             </th>
             <th scope="col">
-                Function
+                Un champs vide
             </th>
         </thead>
         {% for employee in employees %}
             <tbody>
                 <td> {{ employee.name }}</td>
-                <td> {{ employee.function }}</td>
+                <td> (vide) </td>
                 <td><a href="{{ path('employeeDelete', {'id':employee.id}) }}">Remove</a></td>
             </tbody>
 

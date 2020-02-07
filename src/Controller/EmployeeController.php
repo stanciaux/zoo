@@ -8,13 +8,19 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class EmployeeController extends AbstractController
 {
     /**
      * @Route("/employee/form", name="employeeForm")
+     * @param $function
+     * @param null $id
+     * @param EntityManagerInterface $em
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function addEmployee($id = null, EntityManagerInterface $em, Request $request)
+    public function addEmployee(UserPasswordEncoderInterface $passwordEncoder, $id = null, EntityManagerInterface $em, Request $request)
     {
         if ($id == null){
             //on instancie un objet Employee
@@ -31,8 +37,11 @@ class EmployeeController extends AbstractController
 
         //vérifier la soumission et la validité des informations
         if ($form->isSubmitted() && $form->isValid()){
+            $hash = $passwordEncoder->encodePassword($newEmployee, $newEmployee->getPassword());
+            $newEmployee->setPassword($hash);
             if ($id == null){
                 $em->persist($newEmployee);
+
                 //on crée un flash à afficher
                 $this->addFlash("success", "A new employee has been added");
             }else{

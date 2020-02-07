@@ -27,11 +27,6 @@ class Employee implements UserInterface
     private $username;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $function;
-
-    /**
      * @ORM\Column(type="json")
      */
     private $roles = [];
@@ -55,18 +50,6 @@ class Employee implements UserInterface
     public function setName(string $name): self
     {
         $this->name = $name;
-
-        return $this;
-    }
-
-    public function getFunction(): ?string
-    {
-        return $this->function;
-    }
-
-    public function setFunction(string $function): self
-    {
-        $this->function = $function;
 
         return $this;
     }

@@ -21,6 +21,11 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
+                    <a class="nav-link" href="{{ path('app_login') }}" id="login" role="button"
+                       aria-haspopup="true" aria-expanded="false">
+                        Login
+                    </a>
+
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -66,6 +71,14 @@
         </nav>
     </header>
 
+    {# affichage de l'utilisateur #}
+    <div class="container">
+        {% if app.user %}
+            <div>Hello {{ app.user.username }} ! <a href="{{ path('app_logout') }}">Logout</a></div>
+        {% else %}
+            <div scope="col">Non connecté : <a href="{{ path('app_login') }}">Login</a></div>
+        {% endif %}
+    </div>
 
     {#affichage des Flashes#}
     {% for label, messages in app.flashes %}
@@ -78,6 +91,8 @@
     <br>
 
     {% block body %}{% endblock %}
+
+
 
 
     {# JQUERY POUR AFFICHAGE POUR MENU DEROULANT #}
